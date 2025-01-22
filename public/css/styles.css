@@ -12,6 +12,9 @@ html {
 }
 
 body {
+    background-image: url(../img/henry-be--Pg63JThyCg-unsplash.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
     margin: 0;
     padding: 0;
     align-items: center;
@@ -20,13 +23,16 @@ body {
 }
 
 main {
-    padding-left: 5vw;
-    padding-right: 5vw;
-    padding-bottom: 60px;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    margin-bottom: 65px;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #ffffff88;
 }
 
 header {
-    background-color: #086729;
+    background-color: #0b853688;
     height: 70px;
     box-shadow: 0 0 10px 2px;
     position: fixed;
@@ -55,17 +61,17 @@ nav ul {
     height: 100%;
     padding: 0;
     margin: 0;
-  }
+}
   
-  nav li {
+nav li {
     width: 100px;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+}
 
-  nav a {
+nav a {
     background-color: transparent;
     color: #ffffff;
     font-size: 1.5rem;
@@ -78,11 +84,55 @@ nav ul {
     padding: 0 10px;
     cursor: pointer;
     text-decoration: none;
-  }
+}
   
-  nav a:hover {
-    background-color: #06451c;
-  }
+nav a:hover {
+    background-color: #032b11b9;
+}
+
+#frontPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#loginPage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40vh;
+}
+
+#loginForm {
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#loginInputs {
+    display: flex;
+    flex-direction: column;
+}
+
+#loginInputs input {
+    height: 1.5rem;
+    margin: 5px;
+}
+
+.btn {
+    margin: 10px;
+    width: max-content;
+    height: 30px;
+    background-color: #086729;
+    color: white;
+}
+
+.btn:hover {
+   background-color: #06451c;
+}
 
 .footer p {
     margin: 0;
