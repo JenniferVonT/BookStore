@@ -1,22 +1,19 @@
 <header>
     <nav class="navBar">
-      <div">
-        <a class="navbar-brand" href="./">
         <div>
           <div>
-            <a class="nav-link" href="./home">Home</a>
+            <a class="nav-link" href="./">Home</a>
             <% if (!locals.user) { %>
             <a class="nav-link" href="./user/login">Login</a>
             <% } %>
             <% if (locals.user) { %>
             <a class="nav-link" href="./user">Profile</a>
             <form id="logoutForm" action="./user/logout" method="POST" style="display: inline;">
-              <button class="nav-link" type="submit" style="border: none; background: none; padding: 8px; margin: 0;">Logout</button>
+              <button>Logout</button>
             </form>
             <i class="showUserInHeader">Logged in as <i style="color: #998c28;"><%= locals.user.username %></i></i>
             <% } %>
           </div>
-        </div>
       </div>
     </nav>
   </header>
