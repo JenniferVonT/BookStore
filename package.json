@@ -1,0 +1,23 @@
+{
+  "name": "book_lending",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "3-tiered web application using MySQL as a DB that handles a book lending system",
+  "main": "server.js",
+  "scripts": {
+    "start": "node -r dotenv/config src/server.js",
+    "dev": "nodemon --inspect --env-file=.env src/server.js",
+    "lint": "npx eslint ./src || exit 0",
+    "lint:fix": "npx eslint ./src --fix || exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JenniferVonT/book_lending.git"
+  },
+  "author": "Jennifer von Trotta-Treyden",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JenniferVonT/book_lending/issues"
+  },
+  "homepage": "https://github.com/JenniferVonT/book_lending#readme"
+}
