@@ -9,7 +9,7 @@ import expressLayouts from 'express-ejs-layouts'
 import session from 'express-session'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { connectToDatabase } from './config/' // TO_DO: Insert DB connect file.
+// import { connectToDatabase } from './config/' TO_DO: Insert DB connect file.
 import { sessionOptions } from './config/sessionOptions.js'
 import { router } from './routes/router.js'
 import dotenv from 'dotenv'

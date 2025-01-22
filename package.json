@@ -4,6 +4,9 @@
   "type": "module",
   "description": "3-tiered web application using MySQL as a DB that handles a book lending system",
   "main": "server.js",
+  "engines": {
+    "node": ">=22.13.1"
+  },
   "scripts": {
     "start": "node -r dotenv/config src/server.js",
     "dev": "nodemon --inspect --env-file=.env src/server.js",
@@ -19,5 +22,17 @@
   "bugs": {
     "url": "https://github.com/JenniferVonT/book_lending/issues"
   },
-  "homepage": "https://github.com/JenniferVonT/book_lending#readme"
+  "homepage": "https://github.com/JenniferVonT/book_lending#readme",
+  "devDependencies": {
+    "@lnu/eslint-config": "^1.1.10"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.4",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.17.3",
+    "nodemon": "^3.1.9"
+  }
 }
