@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "description": "3-tiered web application using MySQL as a DB that handles a book lending system",
-  "main": "server.js",
+  "main": "src/server.js",
   "engines": {
     "node": ">=22.13.1"
   },
