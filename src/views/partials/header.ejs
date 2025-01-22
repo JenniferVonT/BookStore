@@ -1,20 +1,19 @@
 <header>
-    <nav class="navBar">
-        <div>
-          <div>
-            <a class="nav-link" href="./">Home</a>
-            <% if (!locals.user) { %>
-            <a class="nav-link" href="./user/login">Login</a>
-            <% } %>
-            <% if (locals.user) { %>
-            <a class="nav-link" href="./user">Profile</a>
-            <form id="logoutForm" action="./user/logout" method="POST" style="display: inline;">
-              <button>Logout</button>
-            </form>
-            <i class="showUserInHeader">Logged in as <i style="color: #998c28;"><%= locals.user.username %></i></i>
-            <% } %>
-          </div>
-      </div>
-    </nav>
-  </header>
+  <nav id="navBar">
+    <ul>
+      <li><a class="nav-link" href="./">Home</a></li>
+      <% if (!locals.user) { %>
+      <li><a class="nav-link" href="./user/login">Login</a></li>
+      <li><a class="nav-link" href="./user/create">Signup</a></li>
+      <% } %>
+      <% if (locals.user) { %>
+      <li><a class="nav-link" href="./user">Profile</a>
+        <form id="logoutForm" action="./user/logout" method="POST" style="display: inline;"></li>
+        <button>Logout</button>
+      </form>
+      <i class="showUserInHeader">Logged in as <i style="color: #998c28;"><%= locals.user.username %></i></i>
+      <% } %>
+    </ul>
+  </nav>
+</header>
   
