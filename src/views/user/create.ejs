@@ -1,1 +1,11 @@
-<p>HELLO CREATE ACCOUNT!</p>
+<div id="createUserPage">
+  <h1>Sign up below!</h1>
+  <form id="createForm" method="POST" autocomplete="off" action="./user/create">
+    <div id="createInputs">
+      <input autocomplete="off" type="text" class="formControl" id="usernameInput" name="username" placeholder="Enter a username" required>
+      <input autocomplete="off" type="text" class="formControl" id="passwordInput" name="password" placeholder="Enter a password" required>
+      <input autocomplete="off" type="text" class="formControl" id="passwordInputCheck" name="passwordCheck" placeholder="Repeat password" required>
+    </div>
+    <button type="submit" class="btn">Login</button>
+  </form>
+</div>

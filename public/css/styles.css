@@ -11,6 +11,29 @@ html {
     display: none !important;
 }
 
+#flashMessage {
+    display: flex;
+    position: absolute;
+    width: 40vw;
+    height: 10vh;
+    border-radius: 5px;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 80px;
+    z-index: 9999;
+}
+
+#success {
+  background-color: #06451c;
+}
+
+#danger {
+    background-color: #450606;    
+}
+
 body {
     background-image: url(../img/henry-be--Pg63JThyCg-unsplash.jpg);
     background-repeat: no-repeat;
@@ -97,14 +120,15 @@ nav a:hover {
     align-items: center;
 }
 
-#loginPage {
+#loginPage, #createUserPage {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 40vh;
 }
 
-#loginForm {
+#loginForm, #createForm {
     height: 150px;
     display: flex;
     flex-direction: column;
@@ -112,12 +136,12 @@ nav a:hover {
     align-items: center;
 }
 
-#loginInputs {
+#loginInputs, #createInputs {
     display: flex;
     flex-direction: column;
 }
 
-#loginInputs input {
+#loginInputs input, #createInputs input {
     height: 1.5rem;
     margin: 5px;
 }

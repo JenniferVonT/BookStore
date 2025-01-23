@@ -1,5 +1,5 @@
 <% if (locals.flash) { %>
-    <div>
+    <div id="flashMessage" id="<%= flash.type %>">
       <%= flash.text %>
     </div>
 <% } %>
