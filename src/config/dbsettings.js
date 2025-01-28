@@ -16,7 +16,7 @@ export const db = mysql.createPool({
 /**
  * Connects to the DB.
  *
- * @param {PoolCluster} db - The pool created for the db.
+ * @param {mysql.Pool} db - The pool created for the db.
  */
 export const connectToDatabase = async (db) => {
   try {

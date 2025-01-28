@@ -5,6 +5,7 @@
  */
 
 import { db } from '../config/dbsettings.js'
+import bcrypt from 'bcrypt'
 
 /**
  * Encapsulates the home controller.
@@ -52,6 +53,31 @@ export class UserController {
   }
 
   /**
+   * Handles the login post event.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
+   */
+  loginUser (req, res, next) {
+    try {
+      /*
+      const { username, password } = req.body
+      */
+
+      // TO-DO: check username and psw against the DB.
+
+      // TO-DO: throw an error if the account does not exist.
+
+      // TO-DO: redirect to user page instead.
+      res.redirect('./login')
+    } catch (e) {
+      req.session.flash = { type: 'danger', text: e.message }
+      res.redirect('./login')
+    }
+  }
+
+  /**
    * Renders the user creation page.
    *
    * @param {object} req - Express request object.
@@ -77,16 +103,33 @@ export class UserController {
         password, passwordCheck
       } = req.body
 
+      // Check if the password matches the check and if it is atleast 10 characters long.
       if (password !== passwordCheck) {
         throw new Error('Password do not match!')
+      } else if (password.length < 10) {
+        throw new Error('Password is too short, please use atleast 10 characters!')
       }
 
-      // TO-DO: VALIDATE DATA!
-      // TO-DO: Encrypt and hash password!
-      // TO-DO:
-      const insertQuery = 'INSERT INTO members (fname, lname, address, city, zip, phone, email, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
+      // Check if the email is a valid format:
+      // starts with any number of characters then an @, then any number of characters again before it ends with a . and more characters.
+      if (!/^\D+[@]\D+[.]\D+$/.test(email)) {
+        throw new Error('Invalid email adress!')
+      }
 
-      const response = await db.execute(insertQuery, [fname, lname, address, city, parseInt(zip), phone, email, password])
+      // Check if all the other neccessary attributes are present.
+      const minlength = 2
+      if (fname.length < minlength || lname.length < minlength ||
+          address.length < minlength || city.length < minlength ||
+          zip.length < minlength) {
+        throw new Error('A required input is missing!')
+      }
+
+      // Hash and salt password before saving!
+      const hashedPassword = await bcrypt.hash(password, 10)
+
+      // Create a query string and query the database to create a new user (automatically checks for doublicate users in the db based on email).
+      const query = 'INSERT INTO members (fname, lname, address, city, zip, phone, email, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
+      await db.execute(query, [fname, lname, address, city, parseInt(zip), phone, email, hashedPassword])
 
       req.session.flash = { type: 'success', text: 'The user was created successfully. Please login to continue' }
       res.redirect('./login')
@@ -109,30 +152,5 @@ export class UserController {
    */
   profile (req, res, next) {
     res.render('user/profile')
-  }
-
-  /**
-   * Handles the login post event.
-   *
-   * @param {object} req - Express request object.
-   * @param {object} res - Express response object.
-   * @param {Function} next - Express next middleware function.
-   */
-  loginUser (req, res, next) {
-    try {
-      /*
-      const { username, password } = req.body
-      */
-
-      // TO-DO: check username and psw against the DB.
-
-      // TO-DO: throw an error if the account does not exist.
-
-      // TO-DO: redirect to user page instead.
-      res.redirect('./login')
-    } catch (e) {
-      req.session.flash = { type: 'danger', text: e.message }
-      res.redirect('./login')
-    }
   }
 }

@@ -14,8 +14,10 @@ html {
 #flashMessage {
     display: flex;
     position: absolute;
-    width: 40vw;
-    height: 10vh;
+    width: max-content;
+    height: 3rem;
+    padding-left: 15px;
+    padding-right: 15px;
     border-radius: 5px;
     color: white;
     justify-content: center;
@@ -26,12 +28,12 @@ html {
     z-index: 9999;
 }
 
-#success {
-  background-color: #06451c;
+.success {
+  background-color: #10923e;
 }
 
-#danger {
-    background-color: #450606;    
+.danger {
+    background-color: #c24040;    
 }
 
 body {

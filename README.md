@@ -32,3 +32,20 @@ A user should be able to sign up, login/logout, browse books and subsequently "l
 - Implement a check out system for the books.
 
 - Implement a way to quit the application. (The code should not crash during wrong user input but should instead show a message or do nothing)
+
+## ENV
+
+It needs a .env file to fetch the data to connect to both the database and open a session. Example of the .env structure (change to your own strings):
+
+```ini
+BASE_URL = '/'
+NODE_ENV = 'development' ('production' when deployed)
+PORT = 9999
+SESSION_NAME = sessionnamestring
+SESSION_SECRET = secretstringusedtohashthesessionwithHMAC
+
+DB_HOST = localhost
+DB_USER = databaseUser
+DB_PASSWORD = databasePassword
+DB_NAME = databaseName
+```
