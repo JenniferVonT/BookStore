@@ -80,9 +80,7 @@ export class UserController {
         throw new Error('The email and/or password is incorrect!')
       }
 
-      // TO-DO: redirect to user page instead.
       req.session.user = user
-
       res.redirect('./profile')
     } catch (error) {
       req.session.flash = { type: 'danger', text: error.message }
@@ -165,5 +163,24 @@ export class UserController {
    */
   profile (req, res, next) {
     res.render('user/profile')
+  }
+
+  /**
+   * Renders the user profile page.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
+   */
+  logout (req, res, next) {
+    try {
+      req.session.destroy()
+
+      res.redirect('../')
+    } catch (error) {
+      req.session.flash = { type: 'danger', text: error.message }
+
+      res.redirect('./')
+    }
   }
 }
