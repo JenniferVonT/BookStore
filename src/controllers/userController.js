@@ -59,20 +59,33 @@ export class UserController {
    * @param {object} res - Express response object.
    * @param {Function} next - Express next middleware function.
    */
-  loginUser (req, res, next) {
+  async loginUser (req, res, next) {
     try {
-      /*
-      const { username, password } = req.body
-      */
+      const { email, password } = req.body
 
-      // TO-DO: check username and psw against the DB.
+      // Check if the user exists first based on email.
+      const queryStr = `SELECT * FROM members WHERE email = "${email}"`
+      const response = await db.query(queryStr)
+      const tuples = response[0]
+      const user = tuples[0]
 
-      // TO-DO: throw an error if the account does not exist.
+      if (!user) {
+        throw new Error('The email and/or password is incorrect!')
+      }
+
+      // If a user exists compare the saved password against the login password.
+      const comparedPasswords = await bcrypt.compare(password, user.password)
+
+      if (!comparedPasswords) {
+        throw new Error('The email and/or password is incorrect!')
+      }
 
       // TO-DO: redirect to user page instead.
-      res.redirect('./login')
-    } catch (e) {
-      req.session.flash = { type: 'danger', text: e.message }
+      req.session.user = user
+
+      res.redirect('./profile')
+    } catch (error) {
+      req.session.flash = { type: 'danger', text: error.message }
       res.redirect('./login')
     }
   }
