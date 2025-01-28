@@ -22,7 +22,7 @@ html {
     align-items: center;
     left: 50%;
     transform: translateX(-50%);
-    top: 80px;
+    top: 10px;
     z-index: 9999;
 }
 
@@ -51,7 +51,8 @@ main {
     margin-bottom: 65px;
     margin-top: 20px;
     padding: 10px;
-    background-color: #ffffff88;
+    background-color: #ffffff98;
+    height: 100%;
 }
 
 header {
@@ -118,6 +119,7 @@ nav a:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #ffffffb9;
 }
 
 #loginPage, #createUserPage {
@@ -125,11 +127,11 @@ nav a:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 40vh;
+    height: max-content;
 }
 
 #loginForm, #createForm {
-    height: 150px;
+    height: max-content;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -177,4 +179,4 @@ nav a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+}

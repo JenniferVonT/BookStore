@@ -17,4 +17,4 @@ router.get('/login', (req, res, next) => controller.login(req, res, next))
 router.post('/login', (req, res, next) => controller.loginUser(req, res, next))
 
 router.get('/create', (req, res, next) => controller.create(req, res, next))
-router.post('/create', (req, res, next) => controller.createUser(req, res, next))
+router.post('/create', async (req, res, next) => controller.createUser(req, res, next))
