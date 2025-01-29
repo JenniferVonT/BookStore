@@ -13,6 +13,8 @@
               <label for="quantity">Quantity</label>
               <input autocomplete="off" id="quantity" type="number" min="1" max="15" name="quantity" required>
               <button type="submit" class="btn">Add to Cart</button>
+
+              <p id="<%= book.isbn %>" class="hidden">Added to cart!</p>
             </form>
         </div>
     <% } %>

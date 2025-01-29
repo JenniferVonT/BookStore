@@ -148,24 +148,26 @@ export class BookController {
   }
 
   /**
-   * Handles tadding a book to the cart.
+   * Handles adding a book to the cart.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
    * @param {Function} next - Express next middleware function.
    */
-  addToCart (req, res, next) {
+  async addToCart (req, res, next) {
     try {
       const isbn = req.body.isbn
       const quantity = req.body.quantity
 
-      // TO-DO: Add it to the db.
-      console.log(isbn, quantity)
+      // Create a query that inserts a new tuple into the cart, if it already exists just update the existing one with a new quantity.
+      const query = 'INSERT INTO cart (userid, isbn, qty) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE qty = qty + VALUES(qty)'
 
-      res.status(200)
+      // Insert it into the db with the correct values.
+      await db.execute(query, [parseInt(req.session.user.userid), isbn, quantity])
+
+      res.status(200).json({ message: 'Book added to cart successfully.' })
     } catch (error) {
-      console.log('ADD TO CART SERVER ERROR:', error)
-      res.status(500)
+      res.status(500).json({ error: 'Failed to add book to cart.' })
     }
   }
 

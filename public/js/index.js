@@ -1,6 +1,10 @@
 /**
- * The main client side script.
+ * @file Defines the main client side script.
+ * @module index
+ * @author Jennifer von Trotta-Treyden <jv222th@student.lnu.se>
  */
+
+/* ----------------Handle the add to cart functionality---------------- */
 
 const addToCartForms = document.querySelectorAll('.addToCartForm')
 
@@ -8,9 +12,9 @@ addToCartForms.forEach((form) => {
   form.addEventListener('submit', async (event) => {
     event.preventDefault()
     const isbn = event.target[0].value
-    const quantiy = parseInt(event.target[1].value)
+    const quantity = parseInt(event.target[1].value)
 
-    await addToCart(isbn, quantiy)
+    await addToCart(isbn, quantity)
   })
 })
 
@@ -34,6 +38,23 @@ async function addToCart (isbn, quantity) {
   })
 
   if (response.ok) {
-    console.log(response)
+    addedToCartMessageHandler(isbn)
   }
+}
+
+/**
+ * Handles the showing and removing of the added to cart message.
+ *
+ * @param {String} isbn - The isbn id of the element to show that it is added
+ */
+function addedToCartMessageHandler (isbn) {
+  const addedMessage = document.getElementById(isbn)
+
+  // First show the message.
+  addedMessage.classList.remove('hidden')
+
+  // Then hide the message after 2 seconds.
+  setTimeout(() => {
+    addedMessage.classList.add('hidden')
+  }, 2000)
 }
