@@ -1,5 +1,5 @@
 /**
- * @file Defines the home router.
+ * @file Defines the user router.
  * @module userRouter
  * @author Jennifer von Trotta-Treyden <jv222th@student.lnu.se>
  */
@@ -10,8 +10,6 @@ import { UserController } from '../controllers/userController.js'
 export const router = express.Router()
 
 const controller = new UserController()
-
-router.get('/profile', (req, res, next) => controller.profile(req, res, next))
 
 router.get('/login', (req, res, next) => controller.login(req, res, next))
 router.post('/login', async (req, res, next) => controller.loginUser(req, res, next))

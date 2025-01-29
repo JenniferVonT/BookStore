@@ -90,7 +90,7 @@ nav ul {
 }
   
 nav li {
-    width: 100px;
+    width: max-content;
     height: 100%;
     display: flex;
     justify-content: center;
