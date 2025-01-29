@@ -1,0 +1,12 @@
+<div id="browsePage">
+    <% if (locals.user) { %>
+        <h1>Browse books by subject below</h1>
+        <ul id="subjectList">
+        <% for (const sub of locals.subjects) { %>
+            <li><a class="nav-link" href="./books/browse/<%= sub %>/1"><%= sub %></a></li>
+        <% } %>
+        </ul>
+    <% } else { %>
+    <h2>No user logged in!</h2>
+    <% } %>
+</div>

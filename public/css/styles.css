@@ -116,7 +116,7 @@ nav a:hover {
     background-color: #032b11b9;
 }
 
-#frontPage {
+#frontPage, #browsePage {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -160,6 +160,36 @@ nav a:hover {
 
 .btn:hover {
    background-color: #06451c;
+}
+
+#subjectList {
+    list-style: none;
+}
+
+#subjectList li {
+    height: 2rem;
+    padding: 10px;
+    margin: 5px;
+    background-color: #052912d5;
+}
+
+#subjectList a {
+    background-color: transparent;
+    color: #ffffff;
+    font-size: 1.5rem;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 10px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#subjectList li:hover {
+    background-color: #021d0cee;
 }
 
 .footer p {
