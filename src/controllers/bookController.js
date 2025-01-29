@@ -11,7 +11,7 @@ import { db } from '../config/dbsettings.js'
  */
 export class BookController {
   /**
-   * Provide req.doc to the route if :subject is present.
+   * Provide req.doc and req.page to the route if :subject and :page is present.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
@@ -24,6 +24,8 @@ export class BookController {
       let query = ''
 
       const firstPage = 1
+
+      // Decide the queries based on if it is the first page or a subsequent page.
       if (parseInt(page) === firstPage) {
         query = `SELECT * FROM books WHERE subject = '${subject}' LIMIT 2`
       } else {
@@ -34,6 +36,7 @@ export class BookController {
 
       const result = response[0]
 
+      // Get the max amount of pages aswell for the specific subject.
       const maxPage = await db.query(`SELECT COUNT(*) FROM books WHERE subject = '${subject}'`)
       const maxPageValue = maxPage[0]
 
@@ -42,9 +45,9 @@ export class BookController {
         max: maxPageValue[0]['COUNT(*)']
       }
 
+      // Set the book and page data to the req object.
       req.doc = result
       req.page = pageObj
-      // req.page.max =
 
       // Next middleware.
       next()
@@ -63,6 +66,7 @@ export class BookController {
    */
   async loadSearch (req, res, next, id) {
     try {
+      // TO-DO: Implement search function by title/author.
       console.log('IN LOADSEARCH METHOD')
       next()
     } catch (error) {
@@ -134,11 +138,34 @@ export class BookController {
    */
   searchBooks (req, res, next) {
     try {
+      // TO-DO: Implement search function by title/author.
       console.log('IN SEARCHBOOKS METHOD')
       res.redirect('./')
     } catch (error) {
       req.session.flash = { type: 'danger', text: error.message }
       res.redirect('./login')
+    }
+  }
+
+  /**
+   * Handles tadding a book to the cart.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
+   */
+  addToCart (req, res, next) {
+    try {
+      const isbn = req.body.isbn
+      const quantity = req.body.quantity
+
+      // TO-DO: Add it to the db.
+      console.log(isbn, quantity)
+
+      res.status(200)
+    } catch (error) {
+      console.log('ADD TO CART SERVER ERROR:', error)
+      res.status(500)
     }
   }
 

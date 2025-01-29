@@ -7,9 +7,20 @@
             <h4>Author: <%= book.author %></h4>
             <h4>Price: <%= book.price %></h4>
             <p>ISBN: <%= book.isbn %></p>
+
+            <form class="addToCartForm" autocomplete="off">
+              <input type="hidden" value="<%= book.isbn %>" name="isbn">
+              <label for="quantity">Quantity</label>
+              <input autocomplete="off" id="quantity" type="number" min="1" max="15" name="quantity" required>
+              <button type="submit" class="btn">Add to Cart</button>
+            </form>
         </div>
     <% } %>
-    <i>Page <%= page.current %> of <%= page.max %> <a class="nav-link" href="./books/browse/<%= books[0].subject %>/<%= page.current + 1 %>">Next</a></i>
+    <i>Page <%= page.current %> of <%= page.max %>
+      <% if (page.current > 1) { %>
+        <a class="nav-link" href="./books/browse/<%= books[0].subject %>/<%= page.current - 1 %>">Back</a>
+      <% } %>
+      <a class="nav-link" href="./books/browse/<%= books[0].subject %>/<%= page.current + 1 %>">Next</a></i>
   <% } else { %>
     <h2>No user logged in!</h2>
   <% } %>

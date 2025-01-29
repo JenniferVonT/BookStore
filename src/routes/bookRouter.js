@@ -21,4 +21,5 @@ router.get('/browse/:subject/:page', (req, res, next) => controller.browseSubjec
 router.get('/search', async (req, res, next) => controller.search(req, res, next))
 router.post('/search/:search', (req, res, next) => controller.searchBooks(req, res, next))
 
+router.post('/addToCart', async (req, res, next) => controller.addToCart(req, res, next))
 router.get('/checkout', (req, res, next) => controller.checkout(req, res, next))
