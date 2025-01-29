@@ -36,6 +36,17 @@ html {
     background-color: #c24040;    
 }
 
+hr {
+    border: none;
+    border-top: 2px solid #000;
+    margin: 5px 0;
+    width: 100%;
+}
+
+h4 {
+    margin: 10px 0;
+}
+
 body {
     background-image: url(../img/henry-be--Pg63JThyCg-unsplash.jpg);
     background-repeat: no-repeat;
@@ -156,10 +167,69 @@ nav a:hover {
     height: 30px;
     background-color: #086729;
     color: white;
+    text-decoration: none;
+    border: solid black 1px;
 }
 
 .btn:hover {
    background-color: #06451c;
+}
+
+#subjectPage {
+    display: flex;
+    height: 60vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#subjectPage h2 {
+    background-color: #ffffffb9;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+#subjectPage a {
+    padding: 5px;
+}
+
+#bookPreviews {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    margin: 5px;
+}
+
+.bookPreview {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffffb9;
+    width: 40vw;
+    padding: 5px;
+    margin: 5px;
+}
+
+.addToCartForm {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.addToCartForm input[type='number'] {
+    height: 1.5rem;
+    padding: 0;
+    margin: 0 15px;
+    box-sizing: border-box;
+}
+
+.addToCartForm p {
+    margin: 0 15px;
+}
+
+.addToCartForm button {
+    margin: 0 15px;
 }
 
 #subjectList {
