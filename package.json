@@ -1,8 +1,8 @@
 {
-  "name": "book_lending",
+  "name": "book_store",
   "version": "1.0.0",
   "type": "module",
-  "description": "3-tiered web application using MySQL as a DB that handles a book lending system",
+  "description": "3-tiered web application using MySQL as a DB that handles a book store system",
   "main": "src/server.js",
   "engines": {
     "node": ">=22.13.1"
@@ -15,14 +15,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JenniferVonT/book_lending.git"
+    "url": "git+https://github.com/JenniferVonT/book_store.git"
   },
   "author": "Jennifer von Trotta-Treyden",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JenniferVonT/book_lending/issues"
+    "url": "https://github.com/JenniferVonT/book_store/issues"
   },
-  "homepage": "https://github.com/JenniferVonT/book_lending#readme",
+  "homepage": "https://github.com/JenniferVonT/book_store#readme",
   "devDependencies": {
     "@lnu/eslint-config": "^1.1.10"
   },
