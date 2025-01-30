@@ -1,4 +1,19 @@
 <% if (locals.user) { %>
-<% } else { %>
-  <h2>No user logged in!</h2>
+  <div id="searchPage">
+    <form class="searchForms" id="searchAuthorForm" method="POST" autocomplete="off" action="./books/search">
+      <h2>Search by Author:</h2>
+      <div>
+        <input autocomplete="off" type="text" class="formControl" id="searchInput" name="author" required>
+        <button type="submit" class="btn">Search</button>
+      </div>
+    </form>
+
+    <form class="searchForms" id="searchTitleForm" method="POST" autocomplete="off" action="./books/search">
+      <h2>Search by Title:</h2>
+      <div>
+        <input autocomplete="off" type="text" class="formControl" id="searchInput" name="title" required>
+        <button type="submit" class="btn">Search</button>
+      </div>
+    </form>
+  </div>
 <% } %>

@@ -1,0 +1,32 @@
+<div id="searchResultPage">
+  <% if (locals.user) { %>
+    <h2>All results from the <%= search.type %> "<%= search.searchstring %>"</h2>
+    <div id="bookPreviews">
+      <% for (const book of books) { %>
+          <div class="bookPreview">
+              <h3><%= book.title %></h3>
+              <hr>
+              <h4>Author: <%= book.author %></h4>
+              <h4>Price: <%= book.price %></h4>
+              <p>ISBN: <%= book.isbn %></p>
+
+              <form class="addToCartForm" autocomplete="off">
+                <input type="hidden" value="<%= book.isbn %>" name="isbn">
+                <label for="quantity">Quantity</label>
+                <input autocomplete="off" id="quantity" type="number" min="1" max="15" name="quantity" required>
+                <button type="submit" class="btn">Add to Cart</button>
+
+                <p id="<%= book.isbn %>" class="hidden">Added to cart!</p>
+              </form>
+          </div>
+      <% } %>
+    </div>
+    <b>
+      Page <%= page.current %> of <%= page.max %>
+      <% if (page.current > 1) { %>
+        <a class="nav-link btn" href="./books/search/<%= search.searchstring %>/<%= page.current - 1 %>">Back</a>
+      <% } %>
+      <a class="nav-link btn" href="./books/search/<%= search.searchstring %>/<%= page.current + 1 %>">Next</a>
+    </b>
+  <% } %>
+</div>

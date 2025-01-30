@@ -1,4 +1,37 @@
 <% if (locals.user) { %>
-<% } else { %>
-  <h2>No user logged in!</h2>
+  <div id="checkOutPage">
+    <% if (books.length > 0) { %>
+    <h2>Current cart contents:</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ISBN</th>
+          <th>Title</th>
+          <th>$</th>
+          <th>Qty</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% books.forEach((book) => { %>
+          <tr>
+            <td><%= book.isbn %></td>
+            <td><%= book.title %></td>
+            <td><%= book.price %></td>
+            <td><%= book.qty %></td>
+            <td><%= (book.price * book.qty).toFixed(2) %></td>
+          </tr>
+        <% }); %>
+        <tr>
+          <td colspan="3"><strong>Total</strong></td>
+          <td><strong><%= locals.books.reduce((sum, book) => sum + book.price * book.qty, 0).toFixed(2) %></strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <a href="./books/checkout/confirmation" class="btn nav-link">Proceed to check out</a>
+    <% } else { %>
+      <h2>Your cart is empty</h2>
+    <% } %>
+  </div>
 <% } %>

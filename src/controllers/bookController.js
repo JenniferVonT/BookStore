@@ -17,7 +17,7 @@ export class BookController {
    * @param {object} res - Express response object.
    * @param {Function} next - Express next middleware function.
    * @param {string} subject - The value of the subject to load.
-   * @param {string} page - The value of the page to load.
+   * @param {string} page - The page to load.
    */
   async loadSubject (req, res, next, subject, page) {
     try {
@@ -62,12 +62,55 @@ export class BookController {
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
    * @param {Function} next - Express next middleware function.
-   * @param {string} id - The value of the id for the subject to load.
+   * @param {string} searchString - The value of the searchString for the subject to load.
+   * @param {string} page - The page to load.
    */
-  async loadSearch (req, res, next, id) {
+  async loadSearch (req, res, next, searchString, page) {
     try {
-      // TO-DO: Implement search function by title/author.
-      console.log('IN LOADSEARCH METHOD')
+      // Check if the search is by title or author.
+      const { title } = req.body
+
+      let authorOrTitle = ''
+
+      if (title) {
+        authorOrTitle = 'title'
+      } else {
+        authorOrTitle = 'author'
+      }
+
+      const search = decodeURIComponent(searchString)
+
+      let query = ''
+      const firstPage = 1
+
+      // Decide the queries based on if it is the first page or a subsequent page.
+      if (parseInt(page) === firstPage) {
+        query = `SELECT * FROM books WHERE ${authorOrTitle} LIKE '%${search}%' LIMIT 3`
+      } else {
+        query = `SELECT * FROM books WHERE ${authorOrTitle} LIKE '%${search}%' LIMIT 3 OFFSET ${parseInt(page) * 2 - 2}`
+      }
+
+      const response = await db.query(query)
+
+      const result = response[0]
+
+      // Get the max amount of pages aswell for the specific subject.
+      const maxPage = await db.query(`SELECT COUNT(*) FROM books WHERE ${authorOrTitle} LIKE '%${search}%'`)
+      const maxPageValue = maxPage[0]
+
+      const pageObj = {
+        current: parseInt(page),
+        max: maxPageValue[0]['COUNT(*)']
+      }
+
+      // Set the book and page data to the req object.
+      req.doc = result
+      req.page = pageObj
+      req.search = {}
+      req.search.type = authorOrTitle
+      req.search.searchstring = search
+
+      // Next middleware.
       next()
     } catch (error) {
       next(error)
@@ -138,9 +181,7 @@ export class BookController {
    */
   searchBooks (req, res, next) {
     try {
-      // TO-DO: Implement search function by title/author.
-      console.log('IN SEARCHBOOKS METHOD')
-      res.redirect('./')
+      res.render('books/searchResults', { books: req.doc, page: req.page, search: req.search })
     } catch (error) {
       req.session.flash = { type: 'danger', text: error.message }
       res.redirect('./login')
@@ -178,7 +219,75 @@ export class BookController {
    * @param {object} res - Express response object.
    * @param {Function} next - Express next middleware function.
    */
-  checkout (req, res, next) {
-    res.render('books/checkout')
+  async checkout (req, res, next) {
+    try {
+      const books = await this.#getCart(req)
+      res.render('books/checkout', { books })
+    } catch (error) {
+      res.render('books/checkout')
+    }
+  }
+
+  /**
+   * Handles the checkout confirmation.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
+   */
+  async confirmCheckout (req, res, next) {
+    try {
+      const books = await this.#getCart(req)
+      const user = req.session.user
+      const userid = parseInt(user.userid)
+      const createdAt = new Date().toISOString().split('T')[0]
+
+      // Create an order row.
+      const orderQuery = 'INSERT INTO orders (userid, created, shipAddress, shipCity, shipZip) VALUES (?, ?, ?, ?, ?)'
+
+      const [orderResult] = await db.execute(orderQuery, [userid, createdAt, user.address, user.city, parseInt(user.zip)])
+
+      const ordernr = orderResult.insertId
+
+      // Create order details for each isbn (in odetails).
+      const odetailsQuery = 'INSERT INTO odetails (ono, isbn, qty, amount) VALUES (?, ?, ?, ?)'
+
+      books.forEach(async (book) => {
+        const amount = (book.price * book.qty).toFixed(2)
+
+        await db.execute(odetailsQuery, [ordernr, book.isbn, book.qty, amount])
+      })
+
+      // Remove the cart from the db.
+      const removeCartQuery = 'DELETE FROM cart WHERE userid = ?'
+
+      await db.execute(removeCartQuery, [userid])
+
+      // Create a shipping date 7 days from today.
+      const shipDate = new Date()
+      shipDate.setDate(shipDate.getDate() + 7)
+
+      const shippingDate = shipDate.toISOString().split('T')[0]
+
+      res.render('books/confirmation', { books, ordernr, shippingDate })
+    } catch (error) {
+      res.redirect('../')
+    }
+  }
+
+  /**
+   * Get the cart books from the db.
+   *
+   * @param {object} req - Express request object.
+   * @returns {object} - Returns an object containing all books in the users cart.
+   */
+  async #getCart (req) {
+    const userid = req.session.user.userid
+
+    const query = `SELECT cart.isbn, cart.qty, books.title, books.price FROM cart JOIN books ON cart.isbn = books.isbn WHERE cart.userid = ${userid}`
+
+    const response = await db.query(query)
+
+    return response[0]
   }
 }

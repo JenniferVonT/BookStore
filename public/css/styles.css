@@ -127,7 +127,10 @@ nav a:hover {
     background-color: #032b11b9;
 }
 
-#frontPage, #browsePage {
+#frontPage,
+#browsePage,
+#checkOutPage,
+#checkoutConfirmationPage  {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -175,15 +178,43 @@ nav a:hover {
    background-color: #06451c;
 }
 
-#subjectPage {
+#searchPage {
     display: flex;
-    height: 60vh;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 50vh;
+}
+
+.searchForms {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 10px;
+}
+
+.searchForms div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 30vw;
+}
+
+#subjectPage,
+#searchResultPage {
+    display: flex;
+    height: max-content;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
 }
 
-#subjectPage h2 {
+#subjectPage h2,
+#searchResultPage h2,
+#searchPage h2 {
     background-color: #ffffffb9;
     display: flex;
     width: 100%;
@@ -191,13 +222,15 @@ nav a:hover {
     justify-content: center;
 }
 
-#subjectPage a {
+#subjectPage a,
+#searchResultPage a,
+#checkOutPage a {
     padding: 5px;
 }
 
 #bookPreviews {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     padding: 5px;
     margin: 5px;
 }
@@ -260,6 +293,51 @@ nav a:hover {
 
 #subjectList li:hover {
     background-color: #021d0cee;
+}
+
+#checkOutPage table,
+#checkoutConfirmationPage table {
+    width: 100%;
+    border-collapse: collapse; /* Collapse the table borders to avoid doubling borders */
+}
+  
+#checkOutPage th, #checkOutPage td,
+#checkoutConfirmationPage th, #checkoutConfirmationPage td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1.5px dotted #0b853688; /* Dotted line between rows */
+}
+  
+#checkOutPage tr,
+#checkoutConfirmationPage tr {
+    border-bottom: 1.5px dotted #0b853688; /* Apply the dotted line to each row */
+}
+
+#checkOutPage tr:last-child
+#checkoutConfirmationPage tr:last-child {
+    border-bottom: none; /* Remove the dotted line from the last row */
+}
+
+#invoiceUserData {
+    display: flex;
+    flex-direction: column;
+}
+
+#invoiceUserData p {
+    margin: 0 10px;
+}
+
+#invoiceAddress {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+}
+
+#invoice {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 95%;
 }
 
 .footer p {

@@ -58,3 +58,16 @@ function addedToCartMessageHandler (isbn) {
     addedMessage.classList.add('hidden')
   }, 2000)
 }
+
+/* ----------------Handle the search forms---------------- */
+
+const searchForms = document.querySelectorAll('.searchForms')
+
+searchForms.forEach((form) => {
+  const input = form.querySelector('#searchInput')
+
+  // Update the action value on the form when the user is typing.
+  input.addEventListener('input', () => {
+    form.action = './books/search/' + encodeURIComponent(input.value) + '/1'
+  })
+})

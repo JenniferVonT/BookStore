@@ -77,6 +77,14 @@ try {
   app.use((err, req, res, next) => {
     console.error(err)
 
+    // 403 Authorization error.
+    if (err.status === 403) {
+      res
+        .status(403)
+        .sendFile(join(directoryFullName, 'views', 'errors', '403.html'))
+      return
+    }
+
     // 404 Not Found.
     if (err.status === 404) {
       res

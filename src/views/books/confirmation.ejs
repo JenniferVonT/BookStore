@@ -1,0 +1,48 @@
+<div id="checkoutConfirmationPage">
+  <% if (locals.user) { %>
+    <h2>Invoice for Order no.<%= ordernr %></h2>
+    <div id="invoice">
+      <div id="invoiceUserData">
+        <h3>Shipping Address</h3>
+        <p>Name:  <%= locals.user.fname %> <%= locals.user.lname %></p>
+
+        <div id="invoiceAddress">
+          <p>Address: </p>
+          <div>
+            <p><%= locals.user.address %></p>
+            <p><%= locals.user.city %></p>
+            <p><%= locals.user.zip %></p>
+          </div>
+        </div>
+        <p>Shipping date:  <%= shippingDate %></p>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ISBN</th>
+            <th>Title</th>
+            <th>$</th>
+            <th>Qty</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% books.forEach((book) => { %>
+            <tr>
+              <td><%= book.isbn %></td>
+              <td><%= book.title %></td>
+              <td><%= book.price %></td>
+              <td><%= book.qty %></td>
+              <td><%= (book.price * book.qty).toFixed(2) %></td>
+            </tr>
+          <% }); %>
+          <tr>
+            <td colspan="3"><strong>Total</strong></td>
+            <td><strong><%= locals.books.reduce((sum, book) => sum + book.price * book.qty, 0).toFixed(2) %></strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</div>
