@@ -138,6 +138,14 @@ nav a:hover {
     background-color: #ffffffb9;
 }
 
+#frontPage {
+    padding: 10px;
+}
+
+#frontPage ul {
+    list-style: none;
+}
+
 #loginPage, #createUserPage {
     display: flex;
     flex-direction: column;

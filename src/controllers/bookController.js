@@ -269,7 +269,7 @@ export class BookController {
 
       const shippingDate = shipDate.toISOString().split('T')[0]
 
-      res.render('books/confirmation', { books, ordernr, shippingDate })
+      res.render('books/confirmation', { books, ordernr, shippingDate, currentDate: createdAt })
     } catch (error) {
       res.redirect('../')
     }
