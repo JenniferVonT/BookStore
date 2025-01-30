@@ -3,6 +3,20 @@ A 3-tiered web application where a user can buy books (not connected to any real
 
 This is an assignment in the course 1DV503 Database technology at the Linnaeus University in Sweden.
 
+## Start application
+
+Create a database using MySQL following this Schema
+
+![schema](image.png)
+
+Create and update an .env file (see an example at the end of this readme)
+
+To run the application install all node modules by running:
+`npm i`
+
+Then to start a local development server run
+`npm run dev`
+
 ## Assignment description
 
 This is a web application that is run on the backend, rendering the front-end from the backend through routing. It should be built using NodeJS and a frontend framework (I'm using EJS). The main focus on the assignment is not the frontend though, but the backend, in particular the database and working with SQL through a DBMS, my database will be built using a MySQL DB.
