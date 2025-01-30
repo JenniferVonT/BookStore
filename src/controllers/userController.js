@@ -5,7 +5,7 @@
  */
 
 import { db } from '../config/dbsettings.js'
-import bcrypt from 'bcrypt'
+import argon2 from 'argon2'
 
 /**
  * Encapsulates the user controller.
@@ -44,7 +44,7 @@ export class UserController {
       }
 
       // If a user exists compare the saved password against the login password.
-      const comparedPasswords = await bcrypt.compare(password, user.password)
+      const comparedPasswords = await argon2.verify(user.password, password)
 
       if (!comparedPasswords) {
         throw new Error('The email and/or password is incorrect!')
@@ -105,8 +105,8 @@ export class UserController {
         throw new Error('A required input is missing!')
       }
 
-      // Hash and salt password before saving!
-      const hashedPassword = await bcrypt.hash(password, 10)
+      // Hash password before saving!
+      const hashedPassword = await argon2.hash(password)
 
       // Create a query string and query the database to create a new user (automatically checks for doublicate users in the db based on email).
       const query = 'INSERT INTO members (fname, lname, address, city, zip, phone, email, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
